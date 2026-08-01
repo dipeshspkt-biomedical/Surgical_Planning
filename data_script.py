@@ -22,7 +22,7 @@ from matplotlib import pyplot as plt
 from glob import glob
 import numpy as np
 from dataclasses import dataclass,field
-from monai.transforms import (Compose, LoadImaged,EnsureChannelFirstd,ToTensord,ScaleIntensityd,Lambdad)
+from monai.transforms import (Compose, LoadImaged,EnsureChannelFirstd,ToTensord,ScaleIntensityd,Lambdad,SpatialPadd)
 from monai.data import Dataset,DataLoader,decollate_batch
 from sklearn.model_selection import train_test_split
 import torch
