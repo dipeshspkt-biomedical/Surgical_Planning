@@ -55,7 +55,7 @@ class MyData(pl.LightningDataModule):
     def setup(self,stage=None):
         self.img_files=sorted(glob(f"{self.Main_Directory}/**/**/*_endo.png"))
         self.mask_files=sorted(glob(f"{self.Main_Directory}/**/**/*_endo_watershed_mask.png"))
-        self.data_dict=[{'image':img,'mask':mask} for img,mask in zip(self.img_files,self.mask_files)]
+        self.data_dict=[{'image':img,'mask':mask} for img,mask in zip(self.img_files,self.mask_files) if np.array(Image.open(mask)).shape[2]==3]
         self.sample_positive=[]
         self.sample_negative=[]
         for items in self.data_dict:
