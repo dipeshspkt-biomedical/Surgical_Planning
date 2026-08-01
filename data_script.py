@@ -84,6 +84,6 @@ class MyData(pl.LightningDataModule):
         labels = torch.zeros(mask.shape[:2], dtype=torch.long, device=img.device)
         labels[(mask == torch.tensor([31, 31, 31], device=img.device)).all(dim=-1)] = 1
         labels[(mask == torch.tensor([32, 32, 32], device=img.device)).all(dim=-1)] = 2
-        return labels
+        return labels.unsqueeze(0)
 
 # %%
