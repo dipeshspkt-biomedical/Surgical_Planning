@@ -18,8 +18,8 @@ __generated_with = "0.23.16"
 import marimo as mo
 
 # %%
-import data
-import model
+import data_script as data
+import model_script as model
 import os
 import wandb
 import pytorch_lightning as pl
