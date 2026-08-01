@@ -46,7 +46,7 @@ class Model(pl.LightningModule):
         self.in_channels=3
         self.out_channels=3
         self.learning_rate=0.001
-        self._model = UNet(
+        self.model = UNet(
             spatial_dims=2,
             in_channels=self.in_channels,
             out_channels=self.out_channels,
