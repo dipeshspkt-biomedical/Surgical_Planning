@@ -25,7 +25,7 @@ import pytorch_lightning as pl
 from monai.metrics import DiceMetric
 from monai.data import  decollate_batch
 from monai.losses import DiceLoss
-from monai.networks.nets import SwinUNETR
+from monai.networks.nets import UNet
 from monai.transforms import (
     Activations,
     AsDiscrete,
