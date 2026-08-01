@@ -40,7 +40,8 @@ class MyData(pl.LightningDataModule):
         self.train_transform=Compose([
             LoadImaged(keys=["image","mask"]),
             EnsureChannelFirstd(keys=["image","mask"]),
-            Lambdad(keys=["mask"],func=self.rgb_to_label), 
+            Lambdad(keys=["mask"],func=self.rgb_to_label),
+            SpatialPadd(keys=["image", "mask"],spatial_size=(864, 480)),
             ScaleIntensityd(keys=["image"]),
             ToTensord(keys=["image","mask"]),
         ])
@@ -48,6 +49,7 @@ class MyData(pl.LightningDataModule):
             LoadImaged(keys=["image", "mask"]),
             EnsureChannelFirstd(keys=["image", "mask"]),
             Lambdad(keys=["mask"],func=self.rgb_to_label), 
+            SpatialPadd(keys=["image", "mask"],spatial_size=(864, 480)),
             ScaleIntensityd(keys=["image"]),  
             ToTensord(keys=["image","mask"]),
         ])
