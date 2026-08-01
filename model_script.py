@@ -53,7 +53,6 @@ class Model(pl.LightningModule):
             channels=(16, 32, 64, 128, 256),
             strides=(2, 2, 2, 2),
             num_res_units=2,
-            norm=Norm.BATCH,
         )
         self.lossfunction=DiceLoss(to_onehot_y=True ,softmax=True,reduction='mean',include_background=False)
         self.dice_metric = DiceMetric(include_background=False, reduction="mean", get_not_nans=True)
