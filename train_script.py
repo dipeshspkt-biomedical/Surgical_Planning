@@ -37,10 +37,10 @@ class Train(object):
         os.makedirs(self.log_dir,exist_ok=True)
         wandb.login(key=self.key)
         self.wandb_logger=pl.loggers.WandbLogger(project=self.project_name, name=self.run_name,log_model='all')
+        self.DATA=data.MyData(self.main_dir)
+        self.MODEL=model.Model()
 
     def train(self):
-        DATA=data.MyData(self.main_dir)
-        MODEL=model.Model()
         checkpoint_callback = ModelCheckpoint(
                 monitor='Mean Validation Dice',
                 mode='max',
@@ -59,6 +59,6 @@ class Train(object):
                 callbacks=[checkpoint_callback],
             )
         print('Training from Scratch')
-        trainer.fit(model=MODEL, datamodule=DATA)
+        trainer.fit(model=self.MODEL, datamodule=self.DATA)
 
 # %%
