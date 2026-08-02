@@ -26,6 +26,7 @@ from monai.transforms import (Compose, LoadImaged,EnsureChannelFirstd,ToTensord,
 from monai.data import Dataset,DataLoader,decollate_batch
 from sklearn.model_selection import train_test_split
 import torch
+import time
 
 # %%
 class MyData(pl.LightningDataModule):
@@ -70,8 +71,8 @@ class MyData(pl.LightningDataModule):
         self.sample_train_negative,self.sample_val_negative=train_test_split(self.sample_negative,train_size=self.train_size,test_size=self.test_size)
         self.train_files=self.sample_train_positive+self.sample_train_negative
         self.val_files=self.sample_val_positive+self.sample_val_negative
-        self.train_dataset=Dataset(data=self.train_files,transform=self.train_transform)
-        self.val_dataset=Dataset(data=self.val_files,transform=self.val_transform)
+        self.train_dataset=Dataset(data=self.train_files[0:100],transform=self.train_transform)
+        self.val_dataset=Dataset(data=self.val_files[0:100],transform=self.val_transform)
         
   
     def train_dataloader(self):
