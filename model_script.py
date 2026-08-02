@@ -54,7 +54,7 @@ class Model(pl.LightningModule):
             strides=(2, 2, 2, 2),
             num_res_units=2,
         )
-        self.lossfunction=DiceLoss(to_onehot_y=True ,softmax=True,reduction='mean',include_background=False)
+        self.lossfunction=DiceLoss(to_onehot_y=True ,softmax=True,reduction='mean',include_background=True)
         self.dice_metric = DiceMetric(include_background=False, reduction="mean", get_not_nans=True)
         self.post_pred = Compose([EnsureType("tensor", device="cpu"), AsDiscrete(argmax=True, to_onehot=self.out_channels)])
         self.post_label = Compose([EnsureType("tensor", device="cpu"), AsDiscrete(to_onehot=self.out_channels)])
