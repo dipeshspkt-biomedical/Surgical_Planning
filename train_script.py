@@ -52,7 +52,7 @@ class Train(object):
             )
         trainer = pl.Trainer(
                 devices=[0],
-                max_epochs=60,
+                max_epochs=30,
                 logger=self.wandb_logger,
                 log_every_n_steps=1,
                 check_val_every_n_epoch=3,

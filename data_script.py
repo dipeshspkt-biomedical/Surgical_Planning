@@ -71,10 +71,9 @@ class MyData(pl.LightningDataModule):
         self.sample_train_negative,self.sample_val_negative=train_test_split(self.sample_negative,train_size=self.train_size,test_size=self.test_size)
         self.train_files=self.sample_train_positive+self.sample_train_negative
         self.val_files=self.sample_val_positive+self.sample_val_negative
-        #self.subset_train,_=train_test_split(self.train_files,train_size=100,random_state=42)
-        #self.subset_val,_=train_test_split(self.val_files,train_size=100,random_state=42)
-        self.train_dataset=Dataset(data=self.train_files,transform=self.train_transform)
-        self.val_dataset=Dataset(data=self.val_files,transform=self.val_transform)
+        self.subset_train,self.subset_val=train_test_split(self.sample_positive,train_size=0.8,random_state=42)
+        self.train_dataset=Dataset(data=self.subset_train,transform=self.train_transform)
+        self.val_dataset=Dataset(data=self.subset_val,transform=self.val_transform)
         
   
     def train_dataloader(self):
