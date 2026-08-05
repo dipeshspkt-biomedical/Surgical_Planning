@@ -73,7 +73,7 @@ class MyData(pl.LightningDataModule):
         self.val_files=self.sample_val_positive+self.sample_val_negative
         self.subset_train,self.subset_val=train_test_split(self.sample_positive,train_size=0.8,random_state=42)
         self.train_dataset=Dataset(data=self.subset_train,transform=self.train_transform)
-        self.val_dataset=Dataset(data=self.subset_val,transform=self.val_transform)
+        self.val_dataset=Dataset(data=self.sample_negative,transform=self.val_transform)
         
   
     def train_dataloader(self):
@@ -89,5 +89,3 @@ class MyData(pl.LightningDataModule):
         labels[(mask == torch.tensor([31, 31, 31], device=img.device)).all(dim=-1)] = 1
         labels[(mask == torch.tensor([32, 32, 32], device=img.device)).all(dim=-1)] = 2
         return labels.unsqueeze(0)
-
-# %%
