@@ -77,7 +77,7 @@ class Model(pl.LightningModule):
 
     def validation_step(self, batch, batch_idx):
         images, masks = batch["image"], batch["mask"]
-        roi_size = (128,128)
+        roi_size = (864,480)
         sw_batch_size = 1
         with torch.no_grad():
             outputs = sliding_window_inference(images, roi_size, sw_batch_size, self.forward)
