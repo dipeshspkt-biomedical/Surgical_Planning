@@ -33,7 +33,7 @@ class MyData(pl.LightningDataModule):
     def __init__(self,Main_Directory):
         super().__init__()
         self.Main_Directory=Main_Directory
-        self.batch_size=1
+        self.batch_size=4
         self.train_size=0.8
         self.test_size=0.2
         self.random_state=42
@@ -71,9 +71,8 @@ class MyData(pl.LightningDataModule):
         self.sample_train_negative,self.sample_val_negative=train_test_split(self.sample_negative,train_size=self.train_size,test_size=self.test_size)
         self.train_files=self.sample_train_positive+self.sample_train_negative
         self.val_files=self.sample_val_positive+self.sample_val_negative
-        self.subset_train,self.subset_val=train_test_split(self.sample_positive,train_size=0.8,random_state=42)
-        self.train_dataset=Dataset(data=self.subset_train,transform=self.train_transform)
-        self.val_dataset=Dataset(data=self.sample_negative,transform=self.val_transform)
+        self.train_dataset=Dataset(data=self.train_files,transform=self.train_transform)
+        self.val_dataset=Dataset(data=self.val_files,transform=self.val_transform)
         
   
     def train_dataloader(self):
@@ -89,3 +88,5 @@ class MyData(pl.LightningDataModule):
         labels[(mask == torch.tensor([31, 31, 31], device=img.device)).all(dim=-1)] = 1
         labels[(mask == torch.tensor([32, 32, 32], device=img.device)).all(dim=-1)] = 2
         return labels.unsqueeze(0)
+
+# %%
