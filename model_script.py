@@ -50,7 +50,7 @@ class Model(pl.LightningModule):
             spatial_dims=2,
             in_channels=self.in_channels,
             out_channels=self.out_channels,
-            channels=(16, 32, 64, 128, 256),
+            channels=(32,64,128,256,512),
             strides=(2, 2, 2, 2),
             num_res_units=2,
         )
